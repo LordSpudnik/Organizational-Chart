@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 // Harmonious pastel colors for rows
@@ -197,16 +197,19 @@ const OrgNode = ({
   // Always mount the children wrapper for animation, but control visibility
   const [shouldShowChildren, setShouldShowChildren] = useState(expanded[node.id] !== false);
 
-  React.useEffect(() => {
-    if (expanded[node.id] !== false) setShouldShowChildren(true);
+  // Extract dependencies for useEffect to avoid eslint warning
+  const isExpanded = expanded[node.id] !== false;
+  const nodeId = node.id;
+
+  useEffect(() => {
+    if (isExpanded) setShouldShowChildren(true);
     else {
       // hide after animation
       const t = setTimeout(() => setShouldShowChildren(false), 320);
       return () => clearTimeout(t);
     }
-  }, [expanded[node.id]]);
+  }, [isExpanded, nodeId]);
 
-  const isExpanded = expanded[node.id] !== false;
   const hasChildren = node.children && node.children.length > 0;
 
   // Assign row color for this level
@@ -331,7 +334,7 @@ function App() {
     setZoom((z) => Math.max(0.4, z - 0.1));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setExpanded({ [orgData.id]: true });
   }, []);
 
