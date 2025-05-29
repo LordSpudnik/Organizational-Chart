@@ -1,0 +1,319 @@
+.app-bg {
+  background: #fafaff;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.dark-theme {
+  background: #202234;
+}
+.org-chart-viewport {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.org-chart-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 900px;
+  padding-bottom: 80px;
+}
+
+.org-node-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 260px;
+}
+
+/* Card animation and hover */
+.org-node {
+  min-width: 240px;
+  background: #fff;
+  border: 2px solid #b2b7f9;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(180, 177, 255, 0.14);
+  margin: 12px;
+  padding: 16px 22px 16px 16px;
+  position: relative;
+  transition:
+    box-shadow 0.22s cubic-bezier(0.4,0,0.2,1),
+    border-color 0.18s,
+    background 0.18s,
+    transform 0.22s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  outline: none;
+  opacity: 1;
+}
+
+/* Dark theme for the card */
+.org-node.dark {
+  background: #23263a;
+  color: #e5e5fa;
+  border-color: #444e7c;
+  box-shadow: 0 4px 16px rgba(68, 78, 124, 0.15);
+}
+
+.org-node:focus,
+.org-node:hover {
+  box-shadow: 0 8px 24px rgba(68, 78, 124, 0.22), 0 1.5px 4px #b2b7f9;
+  border-color: #444e7c;
+  background: #f3f6ff;
+  transform: translateY(-2px) scale(1.03);
+  z-index: 2;
+}
+.org-node.dark:focus,
+.org-node.dark:hover {
+  background: #282b3e;
+  border-color: #ffd700;
+  box-shadow: 0 8px 24px rgba(68,78,124,0.27), 0 1.5px 4px #ffd700;
+}
+
+.card-animate {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: card-fade-in;
+}
+
+@keyframes card-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.org-node.expanded {
+  z-index: 2;
+}
+
+.org-node-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.org-node-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid #b2b7f9;
+  object-fit: cover;
+  background: #f4f4fa;
+  transition: border-color 0.18s;
+}
+
+.org-node:focus .org-node-img,
+.org-node:hover .org-node-img {
+  border-color: #444e7c;
+}
+.org-node.dark .org-node-img {
+  border-color: #444e7c;
+  background: #23263a;
+}
+
+.org-node-name {
+  font-weight: 700;
+  font-size: 1.18rem;
+  color: #444e7c;
+  margin-bottom: 2px;
+}
+.org-node.dark .org-node-name {
+  color: #ffd700;
+}
+.org-node-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: #5f7d95;
+  margin-bottom: 2px;
+}
+.org-node.dark .org-node-title {
+  color: #b2b7f9;
+}
+.org-node-empid {
+  font-size: 0.85rem;
+  color: #9699bb;
+}
+.org-node.dark .org-node-empid {
+  color: #b2b7f9;
+}
+
+.org-node-toggle {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  background: #f7f8ff;
+  border: 1px solid #b2b7f9;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  color: #444e7c;
+  outline: none;
+  transition: background 0.2s, border-color 0.18s;
+  z-index: 1;
+}
+.org-node.dark .org-node-toggle {
+  background: #23263a;
+  border-color: #444e7c;
+  color: #ffd700;
+}
+.org-node-toggle:hover {
+  background: #e7e8f7;
+  border-color: #444e7c;
+}
+.org-node.dark .org-node-toggle:hover {
+  background: #ffd70044;
+  border-color: #ffd700;
+}
+
+/* Children transition wrapper */
+.org-children-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  will-change: max-height, opacity;
+  flex-direction: row;
+}
+
+/* Children group row */
+.org-children {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  gap: 48px;
+  position: relative;
+  min-width: 200px;
+  width: 100%;
+}
+
+/* Connectors: vertical and horizontal lines */
+.org-node-container > .org-children-wrapper::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2.5px;
+  height: 20px;
+  background: #b2b7f9;
+  z-index: 0;
+  transform: translateX(-50%);
+}
+.dark-theme .org-node-container > .org-children-wrapper::before {
+  background: #444e7c;
+}
+.org-children::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12px;
+  height: 2.5px;
+  background: #b2b7f9;
+  z-index: 0;
+}
+.dark-theme .org-children::before {
+  background: #444e7c;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .org-chart-root {
+    min-width: 600px;
+  }
+  .org-node {
+    min-width: 180px;
+    padding: 12px 16px 12px 10px;
+  }
+  .org-node-img {
+    width: 38px;
+    height: 38px;
+  }
+  .chart-controls button {
+    width: 38px;
+    height: 38px;
+  }
+  .org-children {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .org-chart-root {
+    min-width: 340px;
+  }
+  .org-node {
+    min-width: 120px;
+    padding: 8px 8px 8px 5px;
+  }
+  .org-node-img {
+    width: 28px;
+    height: 28px;
+  }
+  .org-children {
+    gap: 8px;
+  }
+}
+
+/* Controls */
+.chart-controls {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.chart-controls button {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1.5px solid #e5e6f2;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(120, 110, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.chart-controls button:hover {
+  background: #f5f7fc;
+  box-shadow: 0 4px 12px rgba(120, 110, 255, 0.18);
+}
+
+.theme-toggle-btn {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-top: 10px;
+  padding: 0;
+}
+.theme-toggle-btn svg {
+  display: block;
+}
