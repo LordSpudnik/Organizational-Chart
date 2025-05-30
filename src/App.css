@@ -153,6 +153,34 @@
   color: #b2b7f9;
 }
 
+/* Children count badge styling */
+.org-node-children-count {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -16px;
+  font-size: 0.90rem;
+  font-weight: 700;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: #fff;
+  color: #444e7c;
+  border: 2px solid #b2b7f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(120, 110, 255, 0.13);
+  z-index: 3;
+  pointer-events: none;
+  transition: all 0.18s;
+}
+.org-node-children-count.dark {
+  background: #23263a;
+  color: #ffd700;
+  border-color: #444e7c;
+}
+
 .org-node-toggle {
   position: absolute;
   right: 12px;
@@ -258,6 +286,13 @@
   .org-children {
     gap: 24px;
   }
+  .org-node-children-count {
+    min-width: 18px;
+    height: 18px;
+    font-size: 0.82rem;
+    border-radius: 9px;
+    bottom: -13px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -274,6 +309,13 @@
   }
   .org-children {
     gap: 8px;
+  }
+  .org-node-children-count {
+    min-width: 14px;
+    height: 14px;
+    font-size: 0.68rem;
+    border-radius: 7px;
+    bottom: -8px;
   }
 }
 

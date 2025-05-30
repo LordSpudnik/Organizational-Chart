@@ -257,6 +257,18 @@ const OrgNode = ({
             {isExpanded ? "−" : "+"}
           </button>
         )}
+        {/* Children count badge: show when collapsed */}
+        {hasChildren && !isExpanded && (
+          <div
+            className={`org-node-children-count${theme === "dark" ? " dark" : ""}`}
+            style={{
+              borderColor: cardColor,
+              background: theme === "dark" ? "#23263a" : "#fff"
+            }}
+          >
+            {node.children.length}
+          </div>
+        )}
       </div>
       {hasChildren && (
         <div
