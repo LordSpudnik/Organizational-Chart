@@ -160,7 +160,6 @@ const orgData = {
               designation: "Business Development",
               empId: "T0034",
               img: "https://randomuser.me/api/portraits/men/41.jpg"
-              // FIX: No children property for Manoj Bhardwaj
             },
           ],
         },
@@ -195,7 +194,9 @@ const OrgNode = ({
   theme
 }) => {
   // Always mount the children wrapper for animation, but control visibility
-  const [shouldShowChildren, setShouldShowChildren] = useState(expanded[node.id] !== false);
+  const [shouldShowChildren, setShouldShowChildren] = useState(
+    expanded[node.id] !== false
+  );
 
   // Extract dependencies for useEffect to avoid eslint warning
   const isExpanded = expanded[node.id] !== false;
@@ -247,26 +248,24 @@ const OrgNode = ({
             <div className="org-node-empid">Emp ID: {node.empId}</div>
           </div>
         </div>
+        {/* --- Collapsed children badge becomes clickable; after expanded it becomes a '-' button --- */}
         {hasChildren && (
-          <button
-            className="org-node-toggle"
-            onClick={() => onToggle(node.id)}
-            aria-label={isExpanded ? "Collapse" : "Expand"}
-            tabIndex={-1}
-          >
-            {isExpanded ? "−" : "+"}
-          </button>
-        )}
-        {/* Children count badge: show when collapsed */}
-        {hasChildren && !isExpanded && (
           <div
-            className={`org-node-children-count${theme === "dark" ? " dark" : ""}`}
+            className={`org-node-children-count${theme === "dark" ? " dark" : ""} clickable-badge`}
             style={{
               borderColor: cardColor,
-              background: theme === "dark" ? "#23263a" : "#fff"
+              background: theme === "dark" ? "#23263a" : "#fff",
+              cursor: "pointer",
+              userSelect: "none",
+            }}
+            tabIndex={0}
+            aria-label={isExpanded ? "Collapse" : "Expand"}
+            onClick={() => onToggle(node.id)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") onToggle(node.id);
             }}
           >
-            {node.children.length}
+            {isExpanded ? "−" : node.children.length}
           </div>
         )}
       </div>

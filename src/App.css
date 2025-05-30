@@ -360,3 +360,21 @@
 .theme-toggle-btn svg {
   display: block;
 }
+
+.clickable-badge {
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
+  outline: none;
+  z-index: 10 !important;  /* NEW: ensure it's above the card */
+  position: relative;      /* NEW: position it above the card */
+  pointer-events: auto;    /* NEW: always clickable */
+}
+
+.clickable-badge:active,
+.clickable-badge:focus,
+.clickable-badge:hover {
+  background: #b2b7f944 !important;
+  color: #23263a !important;
+  border-color: #444e7c !important;
+  box-shadow: 0 2px 8px rgba(68, 78, 124, 0.18);
+}
