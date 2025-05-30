@@ -345,7 +345,8 @@
 }
 
 .chart-controls button:hover {
-  background: #f5f7fc;
+  background: #c9c9ca;
+  border: 1.5px solid #c9c9ca;
   box-shadow: 0 4px 12px rgba(120, 110, 255, 0.18);
 }
 
