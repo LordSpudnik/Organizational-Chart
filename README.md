@@ -1,6 +1,6 @@
-# Organizational Chart
+# Organization Chart
 
-This project is an **Organizational Chart** web application built using JavaScript, CSS, and HTML along with React for the framework. It was developed as a part of an internship project for **Cafs Infotech**.
+This project is an **Organization Chart** web application built using JavaScript, CSS, and HTML along with React for the framework. It was developed as a part of an internship project for **Cafs Infotech**.
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ This project is an **Organizational Chart** web application built using JavaScri
 
 ## About
 
-The Organizational Chart project visually represents the structure of an organization, displaying the relationships between employees, teams, and departments. This tool was designed to help Cafs Infotech easily manage and visualize their company structure.
+The Organization Chart project visually represents the structure of an organization, displaying the relationships between employees, teams, and departments. This tool was designed to help Cafs Infotech easily manage and visualize their company structure.
 
 ## Features
 
@@ -29,8 +29,8 @@ To run this project locally:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/LordSpudnik/Organizational-Chart.git
-   cd Organizational-Chart
+   git clone https://github.com/LordSpudnik/Organization-Chart.git
+   cd Organization-Chart
    ```
 
 2. **Open `index.html` in your browser**
@@ -39,7 +39,7 @@ To run this project locally:
 ## Deployment
 
 You can access the live deployment here:  
-**[Deployment Link](https://organizationalchart.netlify.app/)**
+**[Deployment Link](https://Organizationchart.netlify.app/)**
 
 ## Contributing
 
