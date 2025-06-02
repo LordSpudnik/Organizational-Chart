@@ -153,12 +153,11 @@
   color: #b2b7f9;
 }
 
-/* Children count badge styling */
+/* Children count badge styling - now OUTSIDE the card */
 .org-node-children-count {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.90rem;
   font-weight: 700;
   min-width: 22px;
@@ -167,12 +166,11 @@
   background: #fff;
   color: #444e7c;
   border: 2px solid #b2b7f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 2px 8px rgba(120, 110, 255, 0.13);
   z-index: 3;
-  pointer-events: none;
+  margin: -8px auto 10px auto;
+  position: static;
+  pointer-events: auto;
   transition: all 0.18s;
 }
 .org-node-children-count.dark {
@@ -181,34 +179,23 @@
   border-color: #444e7c;
 }
 
-.org-node-toggle {
-  position: absolute;
-  right: 12px;
-  top: 14px;
-  background: #f7f8ff;
-  border: 1px solid #b2b7f9;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  width: 28px;
-  height: 28px;
+/* Remove absolute positioning, now purely margin centered under card */
+.clickable-badge {
   cursor: pointer;
-  color: #444e7c;
+  transition: background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
   outline: none;
-  transition: background 0.2s, border-color 0.18s;
-  z-index: 1;
+  z-index: 10 !important;
+  position: relative;
+  pointer-events: auto;
 }
-.org-node.dark .org-node-toggle {
-  background: #23263a;
-  border-color: #444e7c;
-  color: #ffd700;
-}
-.org-node-toggle:hover {
-  background: #e7e8f7;
-  border-color: #444e7c;
-}
-.org-node.dark .org-node-toggle:hover {
-  background: #ffd70044;
-  border-color: #ffd700;
+
+.clickable-badge:active,
+.clickable-badge:focus,
+.clickable-badge:hover {
+  background: #b2b7f944 !important;
+  color: #23263a !important;
+  border-color: #444e7c !important;
+  box-shadow: 0 2px 8px rgba(68, 78, 124, 0.18);
 }
 
 /* Children transition wrapper */
@@ -240,7 +227,7 @@
   content: "";
   display: block;
   position: absolute;
-  top: 0;
+  top: 28px; /* move down to clear the badge */
   left: 50%;
   width: 2.5px;
   height: 20px;
@@ -291,7 +278,7 @@
     height: 18px;
     font-size: 0.82rem;
     border-radius: 9px;
-    bottom: -13px;
+    margin: -5px auto 7px auto;
   }
 }
 
@@ -315,7 +302,7 @@
     height: 14px;
     font-size: 0.68rem;
     border-radius: 7px;
-    bottom: -8px;
+    margin: -3px auto 4px auto;
   }
 }
 
@@ -359,22 +346,4 @@
 }
 .theme-toggle-btn svg {
   display: block;
-}
-
-.clickable-badge {
-  cursor: pointer;
-  transition: background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
-  outline: none;
-  z-index: 10 !important;  /* NEW: ensure it's above the card */
-  position: relative;      /* NEW: position it above the card */
-  pointer-events: auto;    /* NEW: always clickable */
-}
-
-.clickable-badge:active,
-.clickable-badge:focus,
-.clickable-badge:hover {
-  background: #b2b7f944 !important;
-  color: #23263a !important;
-  border-color: #444e7c !important;
-  box-shadow: 0 2px 8px rgba(68, 78, 124, 0.18);
 }

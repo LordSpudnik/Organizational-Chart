@@ -248,27 +248,29 @@ const OrgNode = ({
             <div className="org-node-empid">Emp ID: {node.empId}</div>
           </div>
         </div>
-        {/* --- Collapsed children badge becomes clickable; after expanded it becomes a '-' button --- */}
-        {hasChildren && (
-          <div
-            className={`org-node-children-count${theme === "dark" ? " dark" : ""} clickable-badge`}
-            style={{
-              borderColor: cardColor,
-              background: theme === "dark" ? "#23263a" : "#fff",
-              cursor: "pointer",
-              userSelect: "none",
-            }}
-            tabIndex={0}
-            aria-label={isExpanded ? "Collapse" : "Expand"}
-            onClick={() => onToggle(node.id)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") onToggle(node.id);
-            }}
-          >
-            {isExpanded ? "−" : node.children.length}
-          </div>
-        )}
       </div>
+      {/* Children count/expand-collapse badge OUTSIDE the card */}
+      {hasChildren && (
+        <div
+          className={`org-node-children-count${theme === "dark" ? " dark" : ""} clickable-badge`}
+          style={{
+            borderColor: cardColor,
+            background: theme === "dark" ? "#23263a" : "#fff",
+            cursor: "pointer",
+            userSelect: "none",
+            marginTop: '-6px',
+            marginBottom: '6px',
+          }}
+          tabIndex={0}
+          aria-label={isExpanded ? "Collapse" : "Expand"}
+          onClick={() => onToggle(node.id)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") onToggle(node.id);
+          }}
+        >
+          {isExpanded ? "−" : node.children.length}
+        </div>
+      )}
       {hasChildren && (
         <div
           className={`org-children-wrapper ${
